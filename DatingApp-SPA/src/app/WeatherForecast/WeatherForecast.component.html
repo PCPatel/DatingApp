@@ -1,0 +1,13 @@
+<p>
+  WeatherForecast !
+</p>
+<ul>
+  <li *ngFor="let wf of weatherforecast">
+    <div>
+      date : {{wf.date | date}}<br>
+      temperatureC : {{wf.temperatureC}}<br>
+      temperatureF : {{wf.temperatureF}}<br>
+      summary : {{wf.summary}}<br>
+    </div>
+  </li>
+</ul>
