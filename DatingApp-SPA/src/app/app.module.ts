@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { BsDropdownModule } from 'ngx-bootstrap';
+
 import { AppComponent } from './app.component';
 import { WeatherForecastComponent } from './WeatherForecast/WeatherForecast.component';
 import { AuthService } from './_service/auth.service';
@@ -22,7 +24,8 @@ import { ErrorInterceptorProvider } from './_service/error.interceptor';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [
     AuthService,
