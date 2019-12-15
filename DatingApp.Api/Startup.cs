@@ -37,6 +37,7 @@ namespace DatingApp.Api
         {
             services.AddDbContext<DataContext>(dbContextOptionsBuilder => dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("DatingAppConnectionString")));
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
             services.AddControllers().AddNewtonsoftJson(opt =>
