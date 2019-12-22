@@ -8,7 +8,7 @@ namespace DatingApp.Api.Migrations
         {
             migrationBuilder.AddColumn<string>(
                 name: "PublicId",
-                table: "Photo",
+                table: "Photos",
                 nullable: true);
         }
 
@@ -16,7 +16,7 @@ namespace DatingApp.Api.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "PublicId",
-                table: "Photo");
+                table: "Photos");
         }
     }
 }

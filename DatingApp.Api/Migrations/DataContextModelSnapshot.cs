@@ -48,7 +48,7 @@ namespace DatingApp.Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Photo");
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("DatingApp.Api.Models.User", b =>
