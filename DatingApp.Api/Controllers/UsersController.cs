@@ -6,6 +6,7 @@ using AutoMapper;
 using DatingApp.Api.Data;
 using DatingApp.Api.Dtos;
 using DatingApp.Api.Helpers;
+using DatingApp.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,15 @@ namespace DatingApp.Api.Controllers
             return Ok(usersToReturn);
         }
 
+        [HttpOptions()]
+        public IActionResult GetUsers()
+        {
+            Request.HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            Request.HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
+            Request.HttpContext.Response.Headers.Add("Access-Control-Max-Age", "3600");
+            return Ok();
+        }
+
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -67,6 +77,30 @@ namespace DatingApp.Api.Controllers
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var like = await _repo.GetLike(id, recipientId);
+
+            if (like != null)
+                return BadRequest("You already like this user");
+
+            if (await _repo.GetUser(recipientId) == null)
+                return NotFound();
+
+            like = new Like { LikerId = id, LikeeId = recipientId };
+
+            _repo.Add<Like>(like);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to like user");
         }
     }
 }
