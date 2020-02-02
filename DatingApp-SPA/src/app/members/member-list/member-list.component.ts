@@ -3,7 +3,7 @@ import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_service/user.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
 import { ActivatedRoute } from '@angular/router';
-import { Pagination, PaginatedResult } from './../../_models/Pagination';
+import { Pagination, PaginatedResult } from '../../_models/pagination';
 
 @Component({
   selector: 'app-member-list',
@@ -25,6 +25,7 @@ export class MemberListComponent implements OnInit {
       this.users = data.users.result;
       this.pagination = data.users.pagination;
     });
+
     this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;

@@ -46,14 +46,14 @@ namespace DatingApp.Api.Controllers
             return Ok(usersToReturn);
         }
 
-        [HttpOptions()]
-        public IActionResult GetUsers()
-        {
-            Request.HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-            Request.HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
-            Request.HttpContext.Response.Headers.Add("Access-Control-Max-Age", "3600");
-            return Ok();
-        }
+        // [HttpOptions()]
+        // public IActionResult GetUsers()
+        // {
+        //     Request.HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        //     Request.HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
+        //     Request.HttpContext.Response.Headers.Add("Access-Control-Max-Age", "3600");
+        //     return Ok();
+        // }
 
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
